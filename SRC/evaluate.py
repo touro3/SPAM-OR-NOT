@@ -1,34 +1,25 @@
-from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
+from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score, accuracy_score
 
 def evaluate_model(model, X_test, y_test):
     """
-    Evaluates the trained model on the test data and prints various performance metrics.
-
-    Parameters:
-    - model: The trained machine learning model.
-    - X_test (ndarray): The testing data features.
-    - y_test (ndarray): The true labels for the testing data.
-
-    Returns:
-    - accuracy (float): The accuracy of the model.
-    - report (str): The classification report of the model.
-    - cm (ndarray): The confusion matrix of the model.
+    Evaluates the trained model on the test data.
     """
+    # Make predictions
     y_pred = model.predict(X_test)
+    y_pred_proba = model.predict_proba(X_test)[:, 1]
     
-    # Accuracy score
-    accuracy = accuracy_score(y_test, y_pred)
-    
-    # Classification report
-    report = classification_report(y_test, y_pred)
-    
-    # Confusion Matrix
-    cm = confusion_matrix(y_test, y_pred)
-    
-    print(f"Accuracy: {accuracy:.2f}")
+    # Print classification report
     print("Classification Report:")
-    print(report)
+    print(classification_report(y_test, y_pred))
+
+    # Print confusion matrix
     print("Confusion Matrix:")
-    print(cm)
-    
-    return accuracy, report, cm
+    print(confusion_matrix(y_test, y_pred))
+
+    # Print accuracy
+    accuracy = accuracy_score(y_test, y_pred)
+    print(f"Accuracy: {accuracy:.2f}")
+
+    # Print ROC-AUC score
+    roc_auc = roc_auc_score(y_test, y_pred_proba)
+    print(f"ROC-AUC Score: {roc_auc:.2f}")
