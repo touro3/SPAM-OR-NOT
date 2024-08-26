@@ -18,18 +18,7 @@ Email spam classification is a common and critical application of machine learni
 
 The project is structured to maintain clarity and modularity, making it easy to understand and extend. Here is an overview of the project structure:
 
-SPAM-OR-NOT/ 
-│ ├── main.py # Main script for training the model 
-├── model.pkl # Saved machine learning model 
-├── vectorizer.pkl # Saved TF-IDF vectorizer 
-├── requirements.txt # Python dependencies for the project 
-├── README.md # Project documentation 
-└── SRC/ 
-    ├── data_loader.py # Module for loading and processing data 
-    ├── preprocessing.py # Module for data preprocessing 
-    ├── model.py # Module for defining and training models 
-    ├── evaluate.py # Module for evaluating the model 
-
+SPAM-OR-NOT/ │ ├── main.py # Main script for training the model ├── model.pkl # Saved machine learning model ├── vectorizer.pkl # Saved TF-IDF vectorizer (if applicable) ├── requirements.txt # Python dependencies for the project ├── README.md # Project documentation └── SRC/ ├── data_loader.py # Module for loading and processing data ├── preprocessing.py # Module for data preprocessing ├── model.py # Module for defining and training models ├── evaluate.py # Module for evaluating the model └── utils.py # Utility functions, if needed
 
 ## Dataset
 
@@ -86,7 +75,7 @@ To use this project, follow these steps:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/SPAM-OR-NOT.git
+   git clone https://github.com/touro3/SPAM-OR-NOT.git
    cd SPAM-OR-NOT
 2. **Setup Virtual Environment**:
    ```bash
