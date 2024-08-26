@@ -17,7 +17,7 @@ Email spam classification is a common and critical application of machine learni
 ## Project Structure
 
 The project is structured to maintain clarity and modularity, making it easy to understand and extend. Here is an overview of the project structure:
-
+```
 SPAM-OR-NOT/ 
 │ ├── main.py # Main script for training the model 
 ├── model.pkl # Saved machine learning model 
@@ -29,7 +29,7 @@ SPAM-OR-NOT/
     ├── preprocessing.py # Module for data preprocessing 
     ├── model.py # Module for defining and training models 
     ├── evaluate.py # Module for evaluating the model 
-
+```
 ## Dataset
 
 The project uses the [UCI Spambase dataset](https://archive.ics.uci.edu/ml/datasets/spambase), a popular dataset for email classification. The dataset contains 4,601 email messages, each represented by 57 features that quantify various characteristics of the email content, such as the frequency of specific words or characters.
