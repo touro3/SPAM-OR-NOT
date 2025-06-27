@@ -1,7 +1,11 @@
 from sklearn.ensemble import RandomForestClassifier, VotingClassifier
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+from preprocessing import preprocess_data
 import pickle
+import joblib
+import pandas as pd
 
 def get_model(model_type='RandomForest'):
     """
@@ -74,12 +78,37 @@ def load_model(filename='model.pkl'):
     with open(filename, 'rb') as f:
         return pickle.load(f)
 
-# Example usage
+# ================================
+# 👇 CÓDIGO EXECUTÁVEL PARA TREINO
+# ================================
 if __name__ == "__main__":
-    # Assuming X_train, y_train are already defined
-    voting_clf = train_ensemble_model(X_train, y_train)
-    
-    # Save the ensemble model
-    save_model(voting_clf, 'voting_clf.pkl')
-    
-    print("Ensemble model saved successfully.")
+    from preprocessing import preprocess_data
+
+    # Carregar o dataset
+    df = pd.read_csv("../data/spambase.data", header=None)
+
+    # Adicionar nome da coluna alvo
+    df.columns = [f"f{i}" for i in range(df.shape[1] - 1)] + ["is_spam"]
+
+    # Pré-processar os dados
+    X_train_scaled, X_test_scaled, y_train, y_test = preprocess_data(df)
+
+    # Treinar o ensemble
+    voting_clf = train_ensemble_model(X_train_scaled, y_train)
+
+    # Salvar o modelo
+    save_model(voting_clf, "voting_clf.pkl")
+
+    print(" Modelo e scaler salvos com sucesso.")
+
+'''{
+  "features": [
+    0.0, 0.64, 0.64, 0.0, 0.32, 0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.64, 0.0, 0.0, 0.0, 0.32, 0.0, 1.29, 1.93, 0.0,
+    0.96, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.778, 0.0, 0.0, 3.756, 61.0, 278.0
+  ]
+}
+'''
